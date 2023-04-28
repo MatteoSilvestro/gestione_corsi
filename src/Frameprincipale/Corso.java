@@ -16,13 +16,13 @@ public class Corso  extends JFrame implements ActionListener{
 	JLabel desc = new JLabel("Descrizione");
 	JTextField t1 = new JTextField();
 	JLabel l1 = new JLabel("Insegnanti");
-	String opzioniIns[]= {"","","",""};
+	String opzioniIns[]= {""};
 	JComboBox ins = new JComboBox(opzioniIns);
 	JLabel l2 = new JLabel("Classi");
-	String opzioniCl[]= {"",""};
+	String opzioniCl[]= {""};
 	JComboBox cl = new JComboBox(opzioniCl);
 	JLabel l3 = new JLabel("Blocco");
-	String opzioniBl[]= {"",""};
+	String opzioniBl[]= {""};
 	JComboBox bl = new JComboBox(opzioniBl);	
 	JButton b1 = new JButton ("INSERISCI");
 	JButton b2 = new JButton ("INDIETRO");
