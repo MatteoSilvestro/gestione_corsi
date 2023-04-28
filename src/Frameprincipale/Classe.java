@@ -47,8 +47,13 @@ public class Classe extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==b1) {
 			try {
-			GestioneDB.InsertClasse(t1.getText(), Integer.parseInt(t2.getText()));
-			}catch(Exception err) {}
+				if(t1.getText().equals("") || t2.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Inserire il campi correttamente", "ERRORE", JOptionPane.ERROR_MESSAGE);
+				}
+				else{
+					GestioneDB.InsertClasse(t1.getText(), Integer.parseInt(t2.getText()));
+				}
+			}catch(Exception err) {JOptionPane.showMessageDialog(null, "Inserire il campi correttamente", "ERRORE", JOptionPane.ERROR_MESSAGE);}
 		}
 		else if(e.getSource()==b2) {
 			MyFrame frame = new MyFrame();

@@ -10,48 +10,49 @@ import javax.swing.*;
 
 public class MyFrame extends JFrame implements ActionListener {
 
-JButton b1 = new JButton("Classi");
-JButton b2 = new JButton("Insegnanti");
-JButton b3 = new JButton("Corsi");
-JButton b4 = new JButton("Esci");
-JPanel griglia = new JPanel();
-JPanel p1 = new JPanel();
-JPanel p2 = new JPanel();
-JPanel p3 = new JPanel();
-JPanel p4 = new JPanel();
+	JButton b1 = new JButton("Classi");
+	JButton b2 = new JButton("Insegnanti");
+	JButton b3 = new JButton("Corsi");
+	JButton b4 = new JButton("Esci");
+	JPanel griglia = new JPanel();
+	JPanel p1 = new JPanel();
+	JPanel p2 = new JPanel();
+	JPanel p3 = new JPanel();
+	JPanel p4 = new JPanel();
 
 
-public MyFrame() {
+	public MyFrame() {
 
-b1.addActionListener(this);
-b2.addActionListener(this);
-b3.addActionListener(this);
-b4.addActionListener(this);
+		JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 10, 10));
+        JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
+        
+        buttonPanel.add(b1);
+        buttonPanel.add(b2);
+        buttonPanel.add(b3);
+        buttonPanel.add(b4);
 
-griglia.setLayout(new GridLayout(4,1));
-griglia.add(p1);
-griglia.add(p2);
-griglia.add(p3);
-griglia.add(p4);
+       
+        JLabel titleLabel = new JLabel("Gestione Scuola", JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
+       
+        labelPanel.add(titleLabel);
 
-p1.add(b1);
-p2.add(b2);
-p3.add(b3);
-p4.add(b4);
+        
+        getContentPane().setLayout(new BorderLayout());
+        getContentPane().add(buttonPanel, BorderLayout.CENTER);
+        getContentPane().add(labelPanel, BorderLayout.NORTH);
 
-
-b1.addActionListener(this);
-b2.addActionListener(this);
-b3.addActionListener(this);
-b4.addActionListener(this);
-
-this.getContentPane().add(griglia);
-this.setTitle("Progetto");
-this.setLayout(new FlowLayout());
-this.setSize(500,500);
-this.setVisible(true);
-this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        b1.addActionListener(this);
+		b2.addActionListener(this);
+		b3.addActionListener(this);
+		b4.addActionListener(this);
+		
+        setTitle("Gestione Corsi");
+        setSize(400, 300);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
 
 
 }
@@ -61,18 +62,18 @@ this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 public void actionPerformed(ActionEvent e) {
 
 	if(e.getSource()==b1) {
-	Classe f_aula = new Classe();
-	this.dispose();
+		Classe f_aula = new Classe();
+		this.dispose();
 	}
 
 	else if(e.getSource()==b2) {
-	Insegnante f_ins = new Insegnante();
-	this.dispose();
+		Insegnante f_ins = new Insegnante();
+		this.dispose();
 	}
 
 	else if(e.getSource()==b3) {
-	Corso f_corso = new Corso();
-	this.dispose();
+		Corso f_corso = new Corso();
+		this.dispose();
 	}
 
 	else if(e.getSource()==b4) {

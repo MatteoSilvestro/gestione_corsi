@@ -60,7 +60,15 @@ public class Insegnante  extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==b1) {
-			GestioneDB.Insert_Insegnanti(t1.getText(), t2.getText(),t4.getText(),Integer.parseInt(t3.getText()),t5.getText());
+			try {
+				if(t1.getText().equals("") || t2.getText().equals("")|| t3.getText().equals("")|| t4.getText().equals("")|| t5.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "Inserire il campi correttamente", "ERRORE", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					GestioneDB.Insert_Insegnanti(t1.getText(), t2.getText(),t4.getText(),Integer.parseInt(t3.getText()),t5.getText());
+				}
+			
+			}catch(Exception er) {JOptionPane.showMessageDialog(null, "Inserire il campi correttamente", "ERRORE", JOptionPane.ERROR_MESSAGE);}
 		}
 		else if(e.getSource()==b2) {
 			MyFrame frame = new MyFrame();
