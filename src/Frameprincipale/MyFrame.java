@@ -14,6 +14,8 @@ public class MyFrame extends JFrame implements ActionListener {
 	JButton b2 = new JButton("Insegnanti");
 	JButton b3 = new JButton("Corsi");
 	JButton b4 = new JButton("Esci");
+	JButton b5 = new JButton("Ricerca");
+
 	JPanel griglia = new JPanel();
 	JPanel p1 = new JPanel();
 	JPanel p2 = new JPanel();
@@ -25,14 +27,16 @@ public class MyFrame extends JFrame implements ActionListener {
 
 		JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel esciPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         
         buttonPanel.add(b1);
         buttonPanel.add(b2);
         buttonPanel.add(b3);
-        buttonPanel.add(b4);
-
-       
+        buttonPanel.add(b5);
+        
+        esciPanel.add(b4);
+        
         JLabel titleLabel = new JLabel("Gestione Scuola", JLabel.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
        
@@ -42,14 +46,16 @@ public class MyFrame extends JFrame implements ActionListener {
         getContentPane().setLayout(new BorderLayout());
         getContentPane().add(buttonPanel, BorderLayout.CENTER);
         getContentPane().add(labelPanel, BorderLayout.NORTH);
+        getContentPane().add(esciPanel, BorderLayout.SOUTH);
 
         b1.addActionListener(this);
 		b2.addActionListener(this);
 		b3.addActionListener(this);
 		b4.addActionListener(this);
+		b5.addActionListener(this);
 		
         setTitle("Gestione Corsi");
-        setSize(400, 300);
+        setSize(400, 350);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -79,6 +85,13 @@ public void actionPerformed(ActionEvent e) {
 	else if(e.getSource()==b4) {
 		System.exit(0);
 	}
+	
+	else if(e.getSource()==b5) {
+		Ricerca f_ricerca = new Ricerca();
+		this.dispose();
+	}
+	
+	
 
 	}
 	
