@@ -73,7 +73,7 @@ public class GestioneDB {
 			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
-			String script="INSERT INTO corsi (ID,Titolo,Capienza,Descrizione,Blocco_orario,Destinatari,IDInsegnante,IDAula) VALUES ('"+randomID+"','"+Titolo+"','"+capienza+"','"+desc+"','"+blocco_orario+"','"+destinatari+"','"+IDInsegnante+"','"+IDAula+"')" ;
+			String script="INSERT INTO corsi (ID,Titolo,Capienza,Descrizione,Blocco_orario,Destinatari,IDProfessore,IDAula) VALUES ('"+randomID+"','"+Titolo+"','"+capienza+"','"+desc+"','"+blocco_orario+"','"+destinatari+"','"+IDInsegnante+"','"+IDAula+"')" ;
 			stmt.executeUpdate(script);
 			stmt.close();
 			connection.close();
@@ -120,22 +120,45 @@ public class GestioneDB {
 		return item;
 	}
 	
-	public static int GetBlocco() {
+	public static ResultSet GetBlocco() {
 		ResultSet item=null;
+		
 		try {
 			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
-			String script="Select Blocco_orario from corsi GROUP BY Blocco_orario";
+			String script="Select * from corsi GROUP BY Blocco_orario";
 			System.out.println(script);
 			item=stmt.executeQuery(script);
 			stmt.close();
 			connection.close();
+			
 		}
 		catch(SQLException ex) {
 			ex.printStackTrace();
 		}
-		return item.getInt(0);
+		return item;
+	}
+	
+	public static ResultSet GetRicerca(int nBlocco,int IDProfessore,int IDClasse) {
+		ResultSet item=null;
+		
+		try {
+			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+			System.out.println("connessione aperta");
+			Statement stmt = connection.createStatement();
+			if (nBlocco) 
+			String script="SELECT * FROM corsi WHERE ";
+			System.out.println(script);
+			item=stmt.executeQuery(script);
+			stmt.close();
+			connection.close();
+			
+		}catch (SQLException ex) {
+	        ex.printStackTrace();
+	    }
+		
+		return item;
 	}
 	
 	public static boolean isAulaIDRepeated(String id) {
@@ -145,7 +168,7 @@ public class GestioneDB {
 	        Statement stmt = connection.createStatement();
 	        String script = "SELECT * FROM aule WHERE ID = '" + id + "'";
 	        ResultSet rs = stmt.executeQuery(script);
-	        isRepeated = rs.next(); // check if the result set contains a row
+	        isRepeated = rs.next();
 	        rs.close();
 	        stmt.close();
 	        connection.close();
@@ -162,7 +185,7 @@ public class GestioneDB {
 	        Statement stmt = connection.createStatement();
 	        String script = "SELECT * FROM insegnanti WHERE ID = '" + id + "'";
 	        ResultSet rs = stmt.executeQuery(script);
-	        isRepeated = rs.next(); // check if the result set contains a row
+	        isRepeated = rs.next();
 	        rs.close();
 	        stmt.close();
 	        connection.close();
@@ -179,7 +202,7 @@ public class GestioneDB {
 	        Statement stmt = connection.createStatement();
 	        String script = "SELECT * FROM corsi WHERE ID = '" + id + "'";
 	        ResultSet rs = stmt.executeQuery(script);
-	        isRepeated = rs.next(); // check if the result set contains a row
+	        isRepeated = rs.next();
 	        rs.close();
 	        stmt.close();
 	        connection.close();
