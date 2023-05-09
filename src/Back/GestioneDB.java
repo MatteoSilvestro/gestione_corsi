@@ -12,6 +12,7 @@ import java.sql.Statement;
 // Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
 // Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 // maria db path : C:\MariaDB
+//maria db path : "C:\Users\matte\Downloads\mariadb-java-client-3.1.3.jar"
 
 public class GestioneDB {
 
@@ -147,10 +148,10 @@ public class GestioneDB {
 			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
-			if (nBlocco) 
+			/*if (nBlocco) 
 			String script="SELECT * FROM corsi WHERE ";
 			System.out.println(script);
-			item=stmt.executeQuery(script);
+			item=stmt.executeQuery(script);*/
 			stmt.close();
 			connection.close();
 			
