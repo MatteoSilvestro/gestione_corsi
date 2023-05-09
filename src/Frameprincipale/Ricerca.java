@@ -43,7 +43,7 @@ public class Ricerca  extends JFrame implements ActionListener  {
 		this.add(b1);
 		this.add(b2);
 		
-		ResultSet item=GestioneDB.GetInsegnanti();
+		ResultSet item=GestioneDB.GetInsegnanti(); //hy
 		try {
 			while(item.next()) {
 		
