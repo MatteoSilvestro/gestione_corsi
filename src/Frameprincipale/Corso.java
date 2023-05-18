@@ -110,7 +110,7 @@ public class Corso  extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==b1) {
 			try {
-			if(titoloTextField.getText().equals("") || capienzaTextField.getText().equals("")|| descrizioneTextField.getText().equals("") || bloccoComboBox.getSelectedIndex()==0 || destinatariTextField.getText().equals("") || aulaComboBox.getSelectedItem().toString().split(" ")[0].equals("") || aulaComboBox.getSelectedItem().toString().split(" ")[0].equals("")) {
+			if(titoloTextField.getText().equals("") || capienzaTextField.getText().equals("")|| descrizioneTextField.getText().equals("") || bloccoComboBox.getSelectedIndex()==0 || destinatariTextField.getText().equals("") || aulaComboBox.getSelectedItem().toString().split(" ")[0].equals("") || professoreComboBox.getSelectedItem().toString().split(" ")[0].equals("")) {
 				JOptionPane.showMessageDialog(null, "Tutti i campi sono obbligatori!", "ERRORE", JOptionPane.ERROR_MESSAGE);}
 				
 				else {

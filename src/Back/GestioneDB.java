@@ -1,6 +1,9 @@
 package Back;
 
 import java.util.Random;
+
+import javax.swing.JOptionPane;
+
 import java.util.Arrays;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +21,7 @@ public class GestioneDB {
 
 	public static void InsertClasse(String desc, int capacità) {
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
 			Random rand = new Random();	
@@ -39,7 +42,7 @@ public class GestioneDB {
 	}
 	public static void Insert_Insegnanti(String nome,String cognome,String email,int nOre,String materia) {
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
 			Random rand = new Random();
@@ -71,10 +74,10 @@ public class GestioneDB {
 		    while(isCorsiIDRepeated(randomID)) {
 		    	randomID = Integer.toString(intID);
 		    }
-			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+		    Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
-			String script="INSERT INTO corsi (ID,Titolo,Capienza,Descrizione,Blocco_orario,Destinatari,IDProfessore,IDAula) VALUES ('"+randomID+"','"+Titolo+"','"+capienza+"','"+desc+"','"+blocco_orario+"','"+destinatari+"','"+IDInsegnante+"','"+IDAula+"')" ;
+			String script="INSERT INTO corsi (ID,Titolo,Capienza,Descrizione,Blocco_orario,Destinatari,IDInsegnante,IDAula) VALUES ('"+randomID+"','"+Titolo+"','"+capienza+"','"+desc+"','"+blocco_orario+"','"+destinatari+"','"+IDInsegnante+"','"+IDAula+"')" ;
 			stmt.executeUpdate(script);
 			stmt.close();
 			connection.close();
@@ -88,7 +91,7 @@ public class GestioneDB {
 	public static ResultSet GetInsegnanti() {
 			ResultSet item=null;
 			try {
-				Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+				Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 				System.out.println("connessione aperta");
 				Statement stmt = connection.createStatement();
 				String script="Select * from insegnanti";
@@ -106,7 +109,7 @@ public class GestioneDB {
 	public static ResultSet GetAula() {
 		ResultSet item=null;
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
 			String script="Select * from aule";
@@ -125,10 +128,10 @@ public class GestioneDB {
 		ResultSet item=null;
 		
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
-			String script="Select * from corsi GROUP BY Blocco_orario";
+			String script="Select Blocco_orario from corsi GROUP BY Blocco_orario";
 			System.out.println(script);
 			item=stmt.executeQuery(script);
 			stmt.close();
@@ -141,17 +144,28 @@ public class GestioneDB {
 		return item;
 	}
 	
-	public static ResultSet GetRicerca(int nBlocco,int IDProfessore,int IDClasse) {
+	public static ResultSet GetRicerca(String nBlocco,String IDProfessore, String IDAula) {
 		ResultSet item=null;
 		
 		try {
-			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+			Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 			System.out.println("connessione aperta");
 			Statement stmt = connection.createStatement();
-			/*if (nBlocco) 
-			String script="SELECT * FROM corsi WHERE ";
+			String script="SELECT * FROM corsi WHERE 1=1";
+			try{
+				if(!nBlocco.equals("")) {
+					script = script +" AND Blocco_orario = "+Integer.parseInt(nBlocco);
+				}
+				if(!IDProfessore.equals("")) {
+					script = script +" AND IDInsegnante = "+Integer.parseInt(IDProfessore);
+				}
+				if(!IDAula.equals("")) {
+					script = script +" AND IDAula = "+Integer.parseInt(IDAula);
+				}
+				
+			}catch(Exception e) {JOptionPane.showMessageDialog(null, "Inserire i campi correttamente", "ERRORE", JOptionPane.ERROR_MESSAGE);}
 			System.out.println(script);
-			item=stmt.executeQuery(script);*/
+			item=stmt.executeQuery(script);
 			stmt.close();
 			connection.close();
 			
@@ -165,7 +179,7 @@ public class GestioneDB {
 	public static boolean isAulaIDRepeated(String id) {
 	    boolean isRepeated = false;
 	    try {
-	        Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+	        Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 	        Statement stmt = connection.createStatement();
 	        String script = "SELECT * FROM aule WHERE ID = '" + id + "'";
 	        ResultSet rs = stmt.executeQuery(script);
@@ -182,7 +196,7 @@ public class GestioneDB {
 	public static boolean isInsegnantiIDRepeated(String id) {
 	    boolean isRepeated = false;
 	    try {
-	        Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+	        Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 	        Statement stmt = connection.createStatement();
 	        String script = "SELECT * FROM insegnanti WHERE ID = '" + id + "'";
 	        ResultSet rs = stmt.executeQuery(script);
@@ -199,7 +213,7 @@ public class GestioneDB {
 	public static boolean isCorsiIDRepeated(String id) {
 	    boolean isRepeated = false;
 	    try {
-	        Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=cocito2022");
+	        Connection connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/database_silvestro?user=root&password=matteo05");
 	        Statement stmt = connection.createStatement();
 	        String script = "SELECT * FROM corsi WHERE ID = '" + id + "'";
 	        ResultSet rs = stmt.executeQuery(script);
